@@ -9,15 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack{
+            peg(colors: [.blue, .blue, .green, .yellow])
+            peg(colors: [.red, .green, .red, .yellow])
+            peg(colors: [.red, .yellow, .blue, .yellow])
+        }.padding()
+    }
+    
+    
+    func peg(colors: Array<Color>) -> some View{
+        HStack{
+            ForEach(colors.indices, id: \.self){ index in
+                RoundedRectangle(cornerRadius: 10).aspectRatio(1, contentMode: .fit).foregroundStyle(colors[index])
+            }
+            MatchMarkers(matches: [.exact, .inexact, .nomatch, .exact])
         }
-        .padding()
     }
 }
+
+
 
 #Preview {
     ContentView()
